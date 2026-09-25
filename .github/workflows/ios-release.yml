@@ -30,8 +30,8 @@ jobs:
         run: |
           set -euo pipefail
           xcodebuild \
-            -project mond.xcodeproj \
-            -scheme mond \
+            -project cowland.xcodeproj \
+            -scheme cowland \
             -configuration Release \
             -sdk iphoneos \
             -destination 'generic/platform=iOS' \
@@ -39,13 +39,13 @@ jobs:
             CODE_SIGNING_ALLOWED=NO \
             build | xcpretty
 
-          rm -rf Payload mond.ipa
+          rm -rf Payload cowland.ipa
           mkdir -p Payload
 
           APP_PATH="$(find build/Build/Products/Release-iphoneos -maxdepth 1 -name '*.app' -print -quit)"
           cp -R "$APP_PATH" Payload/
 
-          ditto -c -k --keepParent Payload mond.ipa
+          ditto -c -k --keepParent Payload cowland.ipa
           rm -rf Payload
 
       - name: release
@@ -60,7 +60,7 @@ jobs:
 
           NOTES="$(git log -5 --pretty=format:'- %h %s')"
 
-          gh release create development mond.ipa \
+          gh release create development cowland.ipa \
             --target "${GITHUB_SHA}" \
             --title "Development" \
             --prerelease \
