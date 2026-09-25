@@ -57,7 +57,7 @@ struct mond: App {
                 .environmentObject(state)
                 .onOpenURL { url in
                     guard is_pb_archive(url) else {
-                        print("(mond) ignoring unsupported URL: \(url.lastPathComponent)")
+                        print("(Cowland) ignoring unsupported URL: \(url.lastPathComponent)")
                         return
                     }
 
@@ -65,7 +65,7 @@ struct mond: App {
                 }
                 .onAppear() {
                     if !is_supported() {
-                        Alertinator.shared.alert(title: "Not supported!", body: "Your iOS version may not be supported by mond.\nMond only supports iOS 27.0 developer beta 1 - 4.")
+                        Alertinator.shared.alert(title: "Not supported!", body: "Your iOS version may not be supported by Cowland.\nMond only supports iOS 27.0 developer beta 1 - 4.")
                     }
                     
                     grant_all(state: state)
